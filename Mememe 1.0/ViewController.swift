@@ -176,13 +176,15 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
         
         if textField.isSelected == topTextField.isSelected{
-            print("something")
+            print(topTextField.isSelected)
             unsubscribeFromKeyboardNotifications()
             bottomTextField.isSelected = true
+            topTextField.isSelected = false
         }else if textField.isSelected == bottomTextField.isSelected{
-            print("not something")
+            print(bottomTextField.isSelected)
             subscribeToKeyboardNotifications()
             topTextField.isSelected = true
+            bottomTextField.isSelected = false
             
         }
     }
