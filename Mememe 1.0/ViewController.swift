@@ -10,7 +10,7 @@
 import UIKit
 
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
-    
+//    MARK: Meme structure model
     struct Meme {
         let topText: String
         let bottomText: String
@@ -25,7 +25,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
         
     }
-    
+    //MARK: outlets
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var topTextField: UITextField!
@@ -44,12 +44,13 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             NSAttributedString.Key.font:UIFont(name: "Impact", size: 40)!,
             NSAttributedString.Key.strokeWidth:NSNumber(value: -3.0)
         ]
-        //TOP textfield
+        //TOP textfield props
         self.topTextField.delegate = self
         topTextField.text = "TOP"
         topTextField.defaultTextAttributes = memeTextAtributes
         topTextField.textAlignment = .center
-        //BOTTOM text field
+        
+        //BOTTOM text field props
         self.bottomTextField.delegate = self
         bottomTextField.text = "BOTTOM"
         bottomTextField.defaultTextAttributes = memeTextAtributes
@@ -68,12 +69,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
         
     }
-    //saving the meme
+    //MARK: saving the meme
     func save() {
         _ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, original: imagePickerView, memed: generateMemedImage())
     }
     
-    //generating meme
+    //MARK generating meme
     func generateMemedImage() -> UIImage {
         // hiding the toolbar and share button
         bottomToolBar.isHidden = true
@@ -92,7 +93,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     
     
-    //keyboard notification
+    //MARK: keyboard notification
     func subscribeToKeyboardNotifications() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -119,7 +120,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         view.frame.origin.y = 0
     }
     
-    //actions
+    //Mark: actions
     
     @IBAction func shareBtnPressed(_ sender: Any) {
         let memedImage = generateMemedImage()
@@ -153,7 +154,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         present(imagePicker,animated: true, completion: nil)
     }
     
-    // image picker functions
+    // MARK: image picker functions
     
     //Tells the delegate that the user cancelled the pick operation
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -168,7 +169,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             imagePickerView.image = image
         }
     }
-    
+    //MARK: textfield delegate functions
+    //Tells the delegate that editing began in the specified text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField.text!.isEmpty{
@@ -188,7 +190,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             
         }
     }
-    
+    // Asks the delegate if the text field should process the pressing of the return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         return textField.resignFirstResponder()

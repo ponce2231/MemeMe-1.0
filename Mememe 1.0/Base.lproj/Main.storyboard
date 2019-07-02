@@ -18,10 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OYU-dd-jVh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpQ-Qe-BpA">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MUz-ke-ofb"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem title="ALBUM" width="253" id="8GZ-T3-0gw">
+                                    <barButtonItem title="ALBUM" width="255" id="8GZ-T3-0gw">
                                         <connections>
                                             <action selector="takeAnImage:" destination="BYZ-38-t0r" id="8WK-LK-sIi"/>
                                         </connections>
@@ -33,50 +39,57 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OYU-dd-jVh">
-                                <rect key="frame" x="0.0" y="63" width="375" height="560"/>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="pxu-7g-FvR">
-                                <rect key="frame" x="72" y="91" width="230" height="17"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxu-7g-FvR">
+                                <rect key="frame" x="72" y="91" width="230" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kgx-rV-HNT"/>
+                                    <constraint firstAttribute="width" constant="230" id="mW6-wc-HQl"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Pi5-H8-KJ5">
-                                <rect key="frame" x="72" y="474" width="230" height="17"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pi5-H8-KJ5">
+                                <rect key="frame" x="72" y="497" width="230" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dt5-yf-jck"/>
+                                    <constraint firstAttribute="width" constant="230" id="rhW-9H-h7D"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqi-yr-633">
-                                <rect key="frame" x="16" y="20" width="70" height="30"/>
+                                <rect key="frame" x="24" y="20" width="70" height="40"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="7Pk-nN-jYt"/>
-                                    <constraint firstAttribute="height" constant="30" id="usD-2n-13Z"/>
+                                    <constraint firstAttribute="width" constant="70" id="pkh-23-Vja"/>
+                                    <constraint firstAttribute="height" constant="40" id="usD-2n-13Z"/>
                                 </constraints>
                                 <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="shareBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kZD-VZ-OIu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pxu-7g-FvR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="71" id="0jQ-tv-fTc"/>
+                            <constraint firstItem="OYU-dd-jVh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4dg-hK-Mby"/>
                             <constraint firstItem="pxu-7g-FvR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="72" id="8ZY-xh-YWc"/>
-                            <constraint firstItem="vqi-yr-633" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="A7b-ib-IZ3"/>
                             <constraint firstItem="OYU-dd-jVh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DfL-d8-Hh7"/>
-                            <constraint firstItem="OYU-dd-jVh" firstAttribute="top" secondItem="vqi-yr-633" secondAttribute="bottom" constant="13" id="P3q-74-av8"/>
+                            <constraint firstItem="vqi-yr-633" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="S1d-n8-GqN"/>
                             <constraint firstItem="Pi5-H8-KJ5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="72" id="SH8-Rr-8vk"/>
+                            <constraint firstItem="tpQ-Qe-BpA" firstAttribute="top" secondItem="Pi5-H8-KJ5" secondAttribute="bottom" constant="86" id="VQN-qy-iVV"/>
                             <constraint firstItem="OYU-dd-jVh" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WjE-55-0MV"/>
+                            <constraint firstItem="vqi-yr-633" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="cz0-3a-9P8"/>
                             <constraint firstItem="Pi5-H8-KJ5" firstAttribute="top" secondItem="pxu-7g-FvR" secondAttribute="bottom" constant="366" id="dDW-sZ-qHf"/>
                             <constraint firstItem="tpQ-Qe-BpA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lP9-bo-rmA"/>
-                            <constraint firstItem="tpQ-Qe-BpA" firstAttribute="top" secondItem="OYU-dd-jVh" secondAttribute="bottom" id="lhb-lx-0Bj"/>
-                            <constraint firstItem="vqi-yr-633" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="mUP-xm-T8X"/>
                             <constraint firstItem="tpQ-Qe-BpA" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="p7e-v8-jMf"/>
-                            <constraint firstItem="OYU-dd-jVh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="uIQ-eP-Ske"/>
                             <constraint firstItem="tpQ-Qe-BpA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vtf-Gy-swL"/>
+                            <constraint firstItem="OYU-dd-jVh" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="x9a-5n-TFL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Pi5-H8-KJ5" secondAttribute="trailing" constant="73" id="xqZ-Z1-cr6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pxu-7g-FvR" secondAttribute="trailing" constant="73" id="yC0-pl-MAD"/>
-                            <constraint firstItem="Pi5-H8-KJ5" firstAttribute="top" secondItem="pxu-7g-FvR" secondAttribute="bottom" constant="366" id="zbd-nQ-80T"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
