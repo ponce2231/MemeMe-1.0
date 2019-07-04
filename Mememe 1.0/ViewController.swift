@@ -37,24 +37,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let memeTextAtributes:[NSAttributedString.Key:Any] = [
-            
-            NSAttributedString.Key.strokeColor:UIColor.black,
-            NSAttributedString.Key.foregroundColor:UIColor.white,
-            NSAttributedString.Key.font:UIFont(name: "Impact", size: 40)!,
-            NSAttributedString.Key.strokeWidth:NSNumber(value: -3.0)
-        ]
-        //TOP textfield props
-        self.topTextField.delegate = self
-        topTextField.text = "TOP"
-        topTextField.defaultTextAttributes = memeTextAtributes
-        topTextField.textAlignment = .center
-        
-        //BOTTOM text field props
-        self.bottomTextField.delegate = self
-        bottomTextField.text = "BOTTOM"
-        bottomTextField.defaultTextAttributes = memeTextAtributes
-        bottomTextField.textAlignment = .center
+        setupTextField(textfield: topTextField, text: "TOP")
+        setupTextField(textfield: bottomTextField, text: "BOTTOM")
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +54,26 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
         
     }
+    
+    //MARK: setting up textfields
+    func setupTextField(textfield:UITextField, text: String){
+        let memeTextAtributes:[NSAttributedString.Key:Any] = [
+            
+            NSAttributedString.Key.strokeColor:UIColor.black,
+            NSAttributedString.Key.foregroundColor:UIColor.white,
+            NSAttributedString.Key.font:UIFont(name: "Impact", size: 40)!,
+            NSAttributedString.Key.strokeWidth:NSNumber(value: -3.0)
+        ]
+        
+        textfield.delegate = self
+        textfield.defaultTextAttributes = memeTextAtributes
+        textfield.textAlignment = .center
+        textfield.text = text
+        
+    }
+    
+    
+    
     //MARK: saving the meme
     func save() {
         _ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, original: imagePickerView, memed: generateMemedImage())
@@ -113,11 +118,17 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     }
     //showing the keyboard
     @objc func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y = -getKeyboardHeight(notification)
+        if bottomTextField.isFirstResponder{
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
+        
     }
     //hiding keyboard
     @objc func keyboardWillHide(_ notification:Notification){
-        view.frame.origin.y = 0
+        if bottomTextField.isFirstResponder{
+            view.frame.origin.y = 0
+        }
+        
     }
     
     //Mark: actions
@@ -141,18 +152,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     
     @IBAction func takeAnImage(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController,animated: true, completion: nil)
+        pickingImageWithCameraOrLibrary(source: .photoLibrary)
     }
     
     @IBAction func grabImageWithCamera(_ sender: Any) {
+        pickingImageWithCameraOrLibrary(source: .camera)
+    }
+    
+    func pickingImageWithCameraOrLibrary(source: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = source
         present(imagePicker,animated: true, completion: nil)
     }
+    
+    
     
     // MARK: image picker functions
     
@@ -177,18 +191,18 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             textField.text = ""
         }
         
-        if textField.isSelected == topTextField.isSelected{
-            print(topTextField.isSelected)
-            unsubscribeFromKeyboardNotifications()
-            bottomTextField.isSelected = true
-            topTextField.isSelected = false
-        }else if textField.isSelected == bottomTextField.isSelected{
-            print(bottomTextField.isSelected)
-            subscribeToKeyboardNotifications()
-            topTextField.isSelected = true
-            bottomTextField.isSelected = false
-            
-        }
+//        if textField.isSelected == topTextField.isSelected{
+//            print(topTextField.isSelected)
+//            unsubscribeFromKeyboardNotifications()
+//            bottomTextField.isSelected = true
+//            topTextField.isSelected = false
+//        }else if textField.isSelected == bottomTextField.isSelected{
+//            print(bottomTextField.isSelected)
+//            subscribeToKeyboardNotifications()
+//            topTextField.isSelected = true
+//            bottomTextField.isSelected = false
+//
+//        }
     }
     // Asks the delegate if the text field should process the pressing of the return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
