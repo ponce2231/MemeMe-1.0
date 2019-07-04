@@ -30,7 +30,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -39,24 +39,37 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         setupTextField(textfield: topTextField, text: "TOP")
         setupTextField(textfield: bottomTextField, text: "BOTTOM")
-
+        
+        shareButton.isEnabled = false
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        subscribeToKeyboardNotifications()
         
         if imagePickerView.image == nil{
-            shareButton.isEnabled = false
+            changingBGcolorView(color: .white)
         }else{
-            shareButton.isEnabled = true
+            changingBGcolorView(color: .black)
         }
-        
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        unsubscribeFromKeyboardNotifications()
+    }
+    
+    func changingBGcolorView(color: UIColor) {
+        imagePickerView.backgroundColor = color
     }
     
     //MARK: setting up textfields
     func setupTextField(textfield:UITextField, text: String){
+        
         let memeTextAtributes:[NSAttributedString.Key:Any] = [
             
             NSAttributedString.Key.strokeColor:UIColor.black,
@@ -83,7 +96,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func generateMemedImage() -> UIImage {
         // hiding the toolbar and share button
         bottomToolBar.isHidden = true
-        shareButton.isHidden = true
+        
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
@@ -92,7 +105,6 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         // showing the toolbar
         bottomToolBar.isHidden = false
-        shareButton.isHidden = false
         return memedImage
     }
     
@@ -119,6 +131,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     //showing the keyboard
     @objc func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isFirstResponder{
+            print("height")
             view.frame.origin.y = -getKeyboardHeight(notification)
         }
         
@@ -126,6 +139,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     //hiding keyboard
     @objc func keyboardWillHide(_ notification:Notification){
         if bottomTextField.isFirstResponder{
+            print("0")
             view.frame.origin.y = 0
         }
         
@@ -181,6 +195,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         picker.dismiss(animated: true, completion: nil)
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             imagePickerView.image = image
+            shareButton.isEnabled = true
         }
     }
     //MARK: textfield delegate functions
@@ -190,19 +205,6 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         if textField.text!.isEmpty{
             textField.text = ""
         }
-        
-//        if textField.isSelected == topTextField.isSelected{
-//            print(topTextField.isSelected)
-//            unsubscribeFromKeyboardNotifications()
-//            bottomTextField.isSelected = true
-//            topTextField.isSelected = false
-//        }else if textField.isSelected == bottomTextField.isSelected{
-//            print(bottomTextField.isSelected)
-//            subscribeToKeyboardNotifications()
-//            topTextField.isSelected = true
-//            bottomTextField.isSelected = false
-//
-//        }
     }
     // Asks the delegate if the text field should process the pressing of the return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
