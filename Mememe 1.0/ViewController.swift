@@ -9,22 +9,8 @@
 
 import UIKit
 
-class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
-//    MARK: Meme structure model
-    struct Meme {
-        let topText: String
-        let bottomText: String
-        let originalImage: UIImageView
-        let memedImage: UIImage
-        
-        init(top: String, bottom: String, original: UIImageView, memed: UIImage) {
-            topText = top
-            bottomText = bottom
-            originalImage = original
-            memedImage = memed
-        }
-        
-    }
+class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
+
     //MARK: outlets
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var bottomToolBar: UIToolbar!
@@ -89,7 +75,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     //MARK: saving the meme
     func save() {
-        _ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, original: imagePickerView, memed: generateMemedImage())
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView, memedImage: generateMemedImage())
+        
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
     }
     
     //MARK generating meme
