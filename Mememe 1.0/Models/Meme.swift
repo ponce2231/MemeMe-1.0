@@ -14,11 +14,4 @@ struct Meme {
     let bottomText: String
     let originalImage: UIImageView
     let memedImage: UIImage
-    
-//    init(top: String, bottom: String, original: UIImageView, memed: UIImage) {
-//        topText = top
-//        bottomText = bottom
-//        originalImage = original
-//        memedImage = memed
-//    }
 }

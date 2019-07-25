@@ -98,9 +98,7 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
         bottomToolBar.isHidden = false
         return memedImage
     }
-    
-    
-    
+
     //MARK: keyboard notification
     func subscribeToKeyboardNotifications() {
         
@@ -122,7 +120,6 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     //showing the keyboard
     @objc func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isFirstResponder{
-            print("height")
             view.frame.origin.y = -getKeyboardHeight(notification)
         }
         
@@ -130,7 +127,6 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     //hiding keyboard
     @objc func keyboardWillHide(_ notification:Notification){
         if bottomTextField.isFirstResponder{
-            print("0")
             view.frame.origin.y = 0
         }
         
