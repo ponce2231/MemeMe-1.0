@@ -33,7 +33,7 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.tabBarController?.tabBar.isHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
         
@@ -47,6 +47,7 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     
     override func viewWillDisappear(_ animated: Bool) {
         unsubscribeFromKeyboardNotifications()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func changingBGcolorView(color: UIColor) {
@@ -71,14 +72,11 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
         
     }
     
-    
-    
     //MARK: saving the meme
     func save() {
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView, memedImage: generateMemedImage())
         
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
         
     }
@@ -143,7 +141,7 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
         memeActivity.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if completed == true {
                 self.save()
-                self.dismiss(animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }else{
                 print("Cancel was pressed")
             }
@@ -166,8 +164,6 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
         imagePicker.sourceType = source
         present(imagePicker,animated: true, completion: nil)
     }
-    
-    
     
     // MARK: image picker functions
     
@@ -197,6 +193,10 @@ class CreateMemeViewController: UIViewController,UIImagePickerControllerDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         return textField.resignFirstResponder()
+    }
+    @IBAction func cancelWasPressed(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

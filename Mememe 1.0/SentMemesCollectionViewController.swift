@@ -9,9 +9,12 @@
 import UIKit
 import Foundation
 
-private let reuseIdentifier = "Cell"
+//private let reuseIdentifier = "Cell"
 
 class SentMemesCollectionViewController: UICollectionViewController {
+    
+        @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
     
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
@@ -19,17 +22,29 @@ class SentMemesCollectionViewController: UICollectionViewController {
         return appDelegate.memes
     }
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Uncomment the following line to preserve selection between presentations
-//        // self.clearsSelectionOnViewWillAppear = false
-//
-//        // Register cell classes
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let space: CGFloat = 3.0
+        let dimension = (view.frame.size.width - (3 * space)) / 3.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        print(dimension)
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Register cell classes
 //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-//
-//        // Do any additional setup after loading the view.
-//    }
+
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView!.reloadData()
+    }
 
     // MARK: UICollectionViewDataSource
 
@@ -40,7 +55,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SentMemesViewCell", for: indexPath) as! MemesCollectionViewCell
-        let meme = self.memes[(indexPath as NSIndexPath).row]
+        let meme = self.memes[indexPath.row]
         
         cell.memeImageView.image = meme.memedImage
     

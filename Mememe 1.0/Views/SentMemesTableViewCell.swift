@@ -10,8 +10,12 @@ import UIKit
 
 class SentMemesTableViewCell: UITableViewCell {
 
+
+    @IBOutlet weak var memeCellImage: UIImageView!
+    @IBOutlet weak var detailLabel: UILabel!
     
-    @IBOutlet weak var memeTableImage: UIImageView!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
