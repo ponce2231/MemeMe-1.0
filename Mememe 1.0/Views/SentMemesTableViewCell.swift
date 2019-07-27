@@ -9,7 +9,12 @@
 import UIKit
 
 class SentMemesTableViewCell: UITableViewCell {
-
+   
+    var memes: [Meme]! {
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        return appDelegate.memes
+    }
 
     @IBOutlet weak var memeCellImage: UIImageView!
     @IBOutlet weak var detailLabel: UILabel!

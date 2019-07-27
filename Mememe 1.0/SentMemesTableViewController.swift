@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesTableViewController: UITableViewController{
+class SentMemesTableViewController: UITableViewController {
 
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
@@ -35,11 +35,16 @@ class SentMemesTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentMemesCell", for: indexPath) as! SentMemesTableViewCell
         let memeTableRow =  memes[indexPath.row]
-        
         cell.memeCellImage.image = memeTableRow.memedImage
-        cell.detailLabel?.text = memeTableRow.topText + memeTableRow.bottomText
+        cell.detailLabel?.text = memeTableRow.topText + " " + memeTableRow.bottomText
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       
+    
+            return UITableView.automaticDimension
     }
 
 }
