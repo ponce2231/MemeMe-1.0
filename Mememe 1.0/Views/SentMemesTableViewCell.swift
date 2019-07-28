@@ -9,13 +9,13 @@
 import UIKit
 
 class SentMemesTableViewCell: UITableViewCell {
-   
+   //SHARED MODEL MEME
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-
+    //MARK: OUTLETS
     @IBOutlet weak var memeCellImage: UIImageView!
     @IBOutlet weak var detailLabel: UILabel!
     
@@ -30,7 +30,6 @@ class SentMemesTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

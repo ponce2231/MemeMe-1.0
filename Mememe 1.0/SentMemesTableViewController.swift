@@ -16,22 +16,18 @@ class SentMemesTableViewController: UITableViewController {
         return appDelegate.memes
     }
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //MARK: RELOADS THE TABLE WHEN CHANGED
         tableView!.reloadData()
     }
     // MARK: - Table view data source
-    
+    //DISPLAYS THE NUMBER OF ROWS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.memes.count
     }
 
-    
+    //DISPLAYS THE CONTENT OF THE CELL
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentMemesCell", for: indexPath) as! SentMemesTableViewCell
         let memeTableRow =  memes[indexPath.row]
@@ -40,7 +36,7 @@ class SentMemesTableViewController: UITableViewController {
         
         return cell
     }
-    
+    //CONTROLS THE HEIGHT OF THE ROW
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        
     
