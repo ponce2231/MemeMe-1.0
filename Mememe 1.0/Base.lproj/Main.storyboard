@@ -90,6 +90,35 @@
             </objects>
             <point key="canvasLocation" x="-22.5" y="-1841.1971830985915"/>
         </scene>
+        <!--Details View Controller-->
+        <scene sceneID="gr9-gp-A6Y">
+            <objects>
+                <viewController storyboardIdentifier="DetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9yg-F7-QAo" customClass="DetailsViewController" customModule="Mememe_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3hD-uI-UC6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pKf-Iy-m4a">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pKf-Iy-m4a" firstAttribute="leading" secondItem="3p4-L8-hYi" secondAttribute="leading" id="Epj-kz-ooa"/>
+                            <constraint firstItem="3p4-L8-hYi" firstAttribute="trailing" secondItem="pKf-Iy-m4a" secondAttribute="trailing" id="XPE-qL-qzr"/>
+                            <constraint firstItem="3p4-L8-hYi" firstAttribute="bottom" secondItem="pKf-Iy-m4a" secondAttribute="bottom" id="a6p-hC-f4i"/>
+                            <constraint firstItem="pKf-Iy-m4a" firstAttribute="top" secondItem="3hD-uI-UC6" secondAttribute="top" constant="64" id="jfl-lm-jhh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3p4-L8-hYi"/>
+                    </view>
+                    <connections>
+                        <outlet property="detailsImageView" destination="pKf-Iy-m4a" id="HcD-EN-PSr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yOa-XY-dxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="811.875" y="-757.3943661971831"/>
+        </scene>
         <!--Create Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -187,7 +216,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="y1q-As-zqb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="-798"/>
+            <point key="canvasLocation" x="2012" y="-757"/>
         </scene>
         <!--Sent Memes Table View Controller-->
         <scene sceneID="f5L-vp-qax">
@@ -248,10 +277,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="9yg-F7-QAo" kind="show" id="OwH-uF-1sQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FyJ-DE-Eg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="51" y="-508"/>
+            <point key="canvasLocation" x="133" y="186"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Tf5-8R-CfD">
@@ -288,7 +320,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Abs-zu-9Sf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1292" y="-508"/>
+            <point key="canvasLocation" x="-1014" y="-255"/>
         </scene>
     </scenes>
     <resources>

@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-//private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "SentMemesViewCell"
 
 class SentMemesCollectionViewController: UICollectionViewController {
     
@@ -46,15 +46,25 @@ class SentMemesCollectionViewController: UICollectionViewController {
         // #warning Incomplete implementation, return the number of items
         return self.memes.count
     }
-//DISPLAYS THE CONTENT OF THE CELL 
+//DISPLAYS THE CONTENT OF THE CELL
+    var memesImage = UIImage()
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SentMemesViewCell", for: indexPath) as! MemesCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MemesCollectionViewCell
         let meme = self.memes[indexPath.row]
-        
-        cell.memeImageView.image = meme.memedImage
+        memesImage = meme.memedImage
+        cell.memeImageView.image = memesImage
+            //meme.memedImage
     
         return cell
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        
+        detailsVC.detailsImageView?.image = memesImage
+        navigationController?.pushViewController(detailsVC, animated: true)
+
+    }
+    
     
 
 }

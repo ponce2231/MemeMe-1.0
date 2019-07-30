@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+private let reuseIdentifier = "SentMemesCell"
 class SentMemesTableViewController: UITableViewController {
 
     var memes: [Meme]! {
@@ -24,23 +24,32 @@ class SentMemesTableViewController: UITableViewController {
     // MARK: - Table view data source
     //DISPLAYS THE NUMBER OF ROWS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.memes.count
+        return DataService.instance.getMemes().count
     }
 
     //DISPLAYS THE CONTENT OF THE CELL
+    var memeFromList = UIImage()
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SentMemesCell", for: indexPath) as! SentMemesTableViewCell
-        let memeTableRow =  memes[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SentMemesTableViewCell
+        let memeTableRow = DataService.instance.getMemes()[indexPath.row]
+        
         cell.memeCellImage.image = memeTableRow.memedImage
+        memeFromList = memeTableRow.memedImage
         cell.detailLabel?.text = memeTableRow.topText + " " + memeTableRow.bottomText
         
         return cell
     }
     //CONTROLS THE HEIGHT OF THE ROW
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       
-    
             return UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        //let memeTableRow = memes[indexPath.row]
+        detailsVC.detailsImageView?.image = memeFromList
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
 
 }
