@@ -16,12 +16,12 @@ class SentMemesCollectionViewController: UICollectionViewController {
         @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     
-    var memes: [Meme]! {
+    var meme: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-    
+//    let meme = DataService.instance.getMemes()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,23 +44,21 @@ class SentMemesCollectionViewController: UICollectionViewController {
 //DISPLAYS HOW MANY ITEMS ARE
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.memes.count
+        return meme.count
     }
 //DISPLAYS THE CONTENT OF THE CELL
-    var memesImage = UIImage()
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MemesCollectionViewCell
-        let meme = self.memes[indexPath.row]
-        memesImage = meme.memedImage
-        cell.memeImageView.image = memesImage
-            //meme.memedImage
+       let memes = meme[indexPath.row]
+        cell.memeImageView.image = memes.memedImage
     
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       let memes = meme[indexPath.row]
         let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
         
-        detailsVC.detailsImageView?.image = memesImage
+        detailsVC.detailsImageView?.image = memes.memedImage
         navigationController?.pushViewController(detailsVC, animated: true)
 
     }

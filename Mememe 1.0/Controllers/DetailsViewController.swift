@@ -15,7 +15,7 @@ class DetailsViewController: UIViewController {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-    
+//let memes = DataService.instance.getMemes()
     @IBOutlet weak var detailsImageView: UIImageView!
 
     override func viewWillAppear(_ animated: Bool) {

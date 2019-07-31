@@ -18,5 +18,5 @@ class MemesCollectionViewCell: UICollectionViewCell {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-    
+//let meme = DataService.instance.getMemes()
 }

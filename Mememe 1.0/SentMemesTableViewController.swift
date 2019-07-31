@@ -15,7 +15,7 @@ class SentMemesTableViewController: UITableViewController {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-    
+//    let memes = DataService.instance.getMemes()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //MARK: RELOADS THE TABLE WHEN CHANGED
@@ -24,18 +24,17 @@ class SentMemesTableViewController: UITableViewController {
     // MARK: - Table view data source
     //DISPLAYS THE NUMBER OF ROWS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataService.instance.getMemes().count
+        return memes.count
     }
 
     //DISPLAYS THE CONTENT OF THE CELL
-    var memeFromList = UIImage()
+   
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SentMemesTableViewCell
-        let memeTableRow = DataService.instance.getMemes()[indexPath.row]
+        let memeTableRow = memes[indexPath.row]
         
         cell.memeCellImage.image = memeTableRow.memedImage
-        memeFromList = memeTableRow.memedImage
         cell.detailLabel?.text = memeTableRow.topText + " " + memeTableRow.bottomText
         
         return cell
@@ -46,9 +45,12 @@ class SentMemesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//       let memeToView = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SentMemesTableViewCell
+        
         let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        //let memeTableRow = memes[indexPath.row]
-        detailsVC.detailsImageView?.image = memeFromList
+//        let memeTableRow = memes[indexPath.row]
+        let memeTableRow = memes[indexPath.row]
+        detailsVC.detailsImageView?.image = memeTableRow.memedImage
         navigationController?.pushViewController(detailsVC, animated: true)
     }
 
