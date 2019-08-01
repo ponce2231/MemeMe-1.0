@@ -15,13 +15,25 @@ class DetailsViewController: UIViewController {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
+    var memeImage = UIImage()
 //let memes = DataService.instance.getMemes()
     @IBOutlet weak var detailsImageView: UIImageView!
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        detailsImageView.image = memeImage
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.tabBarController?.tabBar.isHidden = false
     }
     
 }
