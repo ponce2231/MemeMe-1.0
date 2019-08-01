@@ -16,11 +16,11 @@ class SentMemesCollectionViewController: UICollectionViewController {
         @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
+//    var memes: [Meme]! {
+//        let object = UIApplication.shared.delegate
+//        let appDelegate = object as! AppDelegate
+//        return appDelegate.memes
+//    }
 //    let meme = DataService.instance.getMemes()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,19 +44,20 @@ class SentMemesCollectionViewController: UICollectionViewController {
 //DISPLAYS HOW MANY ITEMS ARE
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return memes.count
+        return DataService.instance.getMemes().count
     }
 //DISPLAYS THE CONTENT OF THE CELL
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MemesCollectionViewCell
-       let meme = memes[indexPath.row]
+//       let meme = memes[indexPath.row]
+        let meme = DataService.instance.getMemes()[indexPath.row]
         cell.memeImageView.image = meme.memedImage
     
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        let memeTableRow = memes[indexPath.row]
+        let memeTableRow = DataService.instance.getMemes()[indexPath.row]
         detailsVC.memeImage = memeTableRow.memedImage
         navigationController?.pushViewController(detailsVC, animated: true)
 

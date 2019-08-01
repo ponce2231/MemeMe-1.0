@@ -13,7 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var memes = [Meme]()
-
+//   static var memeInstance = [Meme]()
+    static func getMeme() -> [Meme] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        return appDelegate.memes
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

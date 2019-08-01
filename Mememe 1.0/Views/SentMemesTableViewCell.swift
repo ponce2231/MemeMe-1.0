@@ -15,14 +15,11 @@ class SentMemesTableViewCell: UITableViewCell {
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
     }
-//    let meme = DataService.instance.getMemes()
+ let meme = DataService.instance.getMemes()
 
     //MARK: OUTLETS
     @IBOutlet weak var memeCellImage: UIImageView!
     @IBOutlet weak var detailLabel: UILabel!
-    
-    
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

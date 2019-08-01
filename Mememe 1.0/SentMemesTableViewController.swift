@@ -7,14 +7,16 @@
 //
 
 import UIKit
-private let reuseIdentifier = "SentMemesCell"
-class SentMemesTableViewController: UITableViewController {
 
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
+class SentMemesTableViewController: UITableViewController {
+private let reuseIdentifier = "SentMemesCell"
+    
+
+//    var memes: [Meme]! {
+//        let object = UIApplication.shared.delegate
+//        let appDelegate = object as! AppDelegate
+//        return appDelegate.memes
+//    }
 //    let memes = DataService.instance.getMemes()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -24,7 +26,8 @@ class SentMemesTableViewController: UITableViewController {
     // MARK: - Table view data source
     //DISPLAYS THE NUMBER OF ROWS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memes.count
+        return DataService.instance.getMemes().count
+//        memes.count
     }
 
     //DISPLAYS THE CONTENT OF THE CELL
@@ -32,8 +35,8 @@ class SentMemesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SentMemesTableViewCell
-        let memeTableRow = memes[indexPath.row]
-        
+        let memeTableRow = DataService.instance.getMemes()[indexPath.row]
+//        let memeTable = UIApplication.shared.delegate as! AppDelegat
         cell.memeCellImage.image = memeTableRow.memedImage
         cell.detailLabel?.text = memeTableRow.topText + " " + memeTableRow.bottomText
         
@@ -47,7 +50,8 @@ class SentMemesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        let memeTableRow = memes[indexPath.row]
+//        let memeTableRow = memes[indexPath.row]
+        let memeTableRow = DataService.instance.getMemes()[indexPath.row]
         detailsVC.memeImage = memeTableRow.memedImage
         navigationController?.pushViewController(detailsVC, animated: true)
     }
