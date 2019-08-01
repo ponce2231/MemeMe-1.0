@@ -15,13 +15,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
     
         @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    
-//    var memes: [Meme]! {
-//        let object = UIApplication.shared.delegate
-//        let appDelegate = object as! AppDelegate
-//        return appDelegate.memes
-//    }
-//    let meme = DataService.instance.getMemes()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +42,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
 //DISPLAYS THE CONTENT OF THE CELL
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MemesCollectionViewCell
-//       let meme = memes[indexPath.row]
         let meme = DataService.instance.getMemes()[indexPath.row]
         cell.memeImageView.image = meme.memedImage
     

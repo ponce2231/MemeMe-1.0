@@ -10,12 +10,7 @@ import UIKit
 
 class SentMemesTableViewCell: UITableViewCell {
    //SHARED MODEL MEME
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
- let meme = DataService.instance.getMemes()
+
 
     //MARK: OUTLETS
     @IBOutlet weak var memeCellImage: UIImageView!

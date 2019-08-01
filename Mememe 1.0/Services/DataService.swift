@@ -11,13 +11,6 @@ class DataService {
     static let instance = DataService()
     var memes = [Meme]()
     
-//    var memes: [Meme]! {
-//        let object = UIApplication.shared.delegate
-//        let appDelegate = object as! AppDelegate
-//        return appDelegate.memes
-//    }
-   
-    
     func getMemes() -> [Meme] {
         return memes
     }

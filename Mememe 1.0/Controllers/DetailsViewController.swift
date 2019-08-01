@@ -10,13 +10,8 @@ import UIKit
 
 class DetailsViewController: UIViewController {
 
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
     var memeImage = UIImage()
-//let memes = DataService.instance.getMemes()
+
     @IBOutlet weak var detailsImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()

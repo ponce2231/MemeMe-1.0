@@ -13,10 +13,5 @@ class MemesCollectionViewCell: UICollectionViewCell {
     //MARK: OUTLETS
     @IBOutlet weak var memeImageView: UIImageView!
     //SHARED MODEL MEME 
-    var memes: [Meme]! {
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.memes
-    }
-//let meme = DataService.instance.getMemes()
+
 }
